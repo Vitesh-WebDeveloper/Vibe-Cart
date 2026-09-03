@@ -42,9 +42,10 @@ const Home = () => {
       
 {
 product.map((item) => (
+  // single-page application(Link is not like a because ahref opens page in another page).
         <Link 
-          to={`/product/${item.id}`} 
-          key={item.id} 
+          to={`/product/${item.id}`}
+          key={item.id}
           className="border-2 border-gray-200 rounded-xl p-4 shadow-md bg-white hover:shadow-2xl transition-shadow duration-300 flex flex-col"
         >
           <img src={item.image} alt={item.title} className="h-48 w-full object-contain mb-4" />
