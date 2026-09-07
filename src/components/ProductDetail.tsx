@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { type Product } from "../types";
 
-const ProductDetail = () => {
+const ProductDetail = ({
+  addToCart,
+}: {
+  addToCart: (product: Product) => void;
+  
+}
+) => {
   // 1. Extract the ID from the URL bar
   const { id } = useParams<{ id: string }>();
 
@@ -35,7 +41,7 @@ const ProductDetail = () => {
   if (loading) return <div className="text-center p-10 text-xl font-semibold">Loading Product...</div>;
   if (error) return <div className="text-center p-10 text-xl text-red-600">{error}</div>;
   if (!product) return <div className="text-center p-10 text-xl">No product found.</div>;
-
+  
   // 5. The Product UI Layout
   return (
     <div className="max-w-4xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 border border-gray-200 shadow-lg rounded-xl bg-white">
@@ -51,9 +57,11 @@ const ProductDetail = () => {
         <p className="text-2xl font-bold text-green-600 mb-6">${product.price}</p>
         <p className="text-gray-600 mb-8 leading-relaxed">{product.description}</p>
         
-        <button className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-lg transition-colors w-full md:w-auto">
-          Add to Cart
-        </button>
+        <button
+  onClick={() => addToCart(product)}
+  className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-lg transition-colors w-full md:w-auto">
+  Add to Cart
+</button>
       </div>
     </div>
   );

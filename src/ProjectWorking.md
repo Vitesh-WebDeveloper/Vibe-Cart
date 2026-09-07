@@ -1,4 +1,4 @@
-The sequence of events happens exactly in this order:
+<!-- The sequence of events happens exactly in this order:
 
 The Click (Home.tsx): When a user taps the product card, the <Link> immediately updates the browser's address bar to match the to prop, such as /product/12.
 
@@ -8,4 +8,4 @@ The Component Swap: Because of that match, the router executes the element={<Pro
 
 The Extraction (ProductDetail.tsx): The moment ProductDetail mounts, the useParams hook runs. Because the router explicitly mapped the end of the URL to the :id variable, the hook slices off the 12 and stores it in your id constant.
 
-The Fetch (Next Step): Your component will take that 12 and inject it into the API call to grab only the data for that specific item. 
+The Fetch (Next Step): Your component will take that 12 and inject it into the API call to grab only the data for that specific item.  -->
