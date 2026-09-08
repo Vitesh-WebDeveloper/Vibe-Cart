@@ -9,8 +9,7 @@ const Navbar = ({ cart }: NavbarProps) => {
   // Add together the quantity of every product
   // Example: Laptop × 2 + Mouse × 1 = 3
   const totalItems = cart.reduce(
-    (total, item) => total + item.quantity,
-    0
+    (total, item) => total + item.quantity, 0
   );
 
   return (
