@@ -12,9 +12,10 @@ const Home = () => {
       setLoading(true);
       setError(null);
 
-    try {
-      const responce = await fetch("https://fakestoreapi.com/products");
-      const data = await responce.json();
+     try{
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/products`);
+      const data: Product[] = await response.json(); 
+// By adding ": Product[]", TypeScript will now aggressively warn you if your backend sends the wrong data shape.
       setProducts(data);
     } catch (err) {
      setError("Failed to fetch products. Please try again.");
