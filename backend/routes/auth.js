@@ -1,7 +1,11 @@
 //this creates a "Mini Reception Desk" dedicated entirely to handling sign-ups and log-ins.
 const router = require('express').Router();
-
+const requireAuth = require('../middleware/auth.middleware');
+//This is your Password Scrambler.
+//Bcrypt turns "password123" into unreadable gibberish (like $2a$10$X8...).
 const bcrypt = require('bcryptjs');
+
+//This is your VIP Wristband Printer
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
@@ -16,39 +20,37 @@ if(!email?.includes("@") || !password || password.length < 6){
 }
 
 const existing = await User.findOne({email})
-if(existing) return res.status(400).json({error : "Already an email registered previuously"});
+if(existing) return res.status(400).json({error : "Already an email registered previously"});
 
-// what is this i couldn't understand, what is hash and the new words, and '(password,10) what is this'
+//This tells the scrambler, "Take their password and scramble it 10 times".
 const hashed = await bcrypt.hash(password, 10);
 
-//explain this also
+//This tells the Mongoose robot to take the name, email, and the scrambled password, and permanently save it as a new customer in the MongoDB warehouse.
 const user = await User.create({name,email,password:hashed})
-//explain this also , from starting of the code i didn't even see id , i have just wrote as name,email and password, now from where it came and more over why it has written as _id.
 return res.status(201).json({id: user._id, name: user.name, email: user.email})
-
 });
 
 // --- LOG IN ROUTE ---
-//the same question like before '/login' where does this page is going ,will it open any where ?.
 router.post("/login", async(req,res) =>{
-
-//where is the name here.
 const {email,password} = req.body;
 
 const user = await User.findOne({email});
 
-//explain it.
 if(!user || !(await bcrypt.compare(password, user.password))){
     return res.status(404).json({error : "Invalid credentials"});
 }
 
-//explain this line what is jwt and secret and why it is secret?
 const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
-//explain
 res.json({ token, name: user.name });
-
 });
 
-//where we are exporting , and why = router.
+// Notice how 'requireAuth' is sitting right in the middle? 
+// Express will run the bouncer first. If the bouncer calls next(), it runs the rest.
+router.get('/me', requireAuth, async (req, res) => {
+  // Search the database for the user, but explicitly EXCLUDE the password from the data
+  const user = await User.findById(req.userId).select('-password');
+  res.json(user);
+});
+
 module.exports = router;
