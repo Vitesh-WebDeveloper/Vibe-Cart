@@ -51,6 +51,7 @@ router.get('/me', requireAuth, async (req, res) => {
   // Search the database for the user, but explicitly EXCLUDE the password from the data
   const user = await User.findById(req.userId).select('-password');
   res.json(user);
+
 });
 
 module.exports = router;
