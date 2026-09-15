@@ -13,7 +13,7 @@ const Home = () => {
       setError(null);
 
      try{
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/products`);
+      const response = await fetch(`/products`);
       const data: Product[] = await response.json(); 
 // By adding ": Product[]", TypeScript will now aggressively warn you if your backend sends the wrong data shape.
       setProducts(data);

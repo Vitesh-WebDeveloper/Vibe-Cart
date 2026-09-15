@@ -4,9 +4,11 @@ import { type Product } from "../types";
 
 const ProductDetail = ({
   addToCart,
-} : {
+}: {
   addToCart: (product: Product) => void;
-}) => {
+  
+}
+) => {
   // 1. Extract the ID from the URL bar
   const { id } = useParams<{ id: string }>();
 
@@ -22,8 +24,8 @@ const ProductDetail = ({
       setError(null);
 
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/products/${id}`);
-        const data: Product = await response.json();
+        const response = await fetch(`https://fakestoreapi.com/products/${id}`);        
+        const data = await response.json();
         setProduct(data);
       } catch (err) {
         setError("Could not load product. Please try again.");
@@ -55,10 +57,8 @@ const ProductDetail = ({
         <p className="text-2xl font-bold text-green-600 mb-6">${product.price}</p>
         <p className="text-gray-600 mb-8 leading-relaxed">{product.description}</p>
         
-        <button onClick={ () =>
-     addToCart(product)
-      }
-
+        <button
+  onClick={() => addToCart(product)}
   className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-lg transition-colors w-full md:w-auto">
   Add to Cart
 </button>
