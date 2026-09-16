@@ -24,8 +24,12 @@ const ProductDetail = ({
       setError(null);
 
       try {
-        const response = await fetch(`https://fakestoreapi.com/products/${id}`);        
-        const data = await response.json();
+// The variable is followed by the specific product ID
+const response = await fetch(`${import.meta.env.VITE_API_URL}/products/${id}`);
+
+// Enforce the TypeScript type as a single Product (no array brackets)
+const data: Product = await response.json();
+
         setProduct(data);
       } catch (err) {
         setError("Could not load product. Please try again.");

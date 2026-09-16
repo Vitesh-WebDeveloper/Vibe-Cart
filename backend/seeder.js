@@ -34,7 +34,6 @@ process.exit(1);
 
 };
 
-
 importData();
 
 // Run node seeder.js in your terminal to populate your cloud database in one go.

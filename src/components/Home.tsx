@@ -13,9 +13,13 @@ const Home = () => {
       setError(null);
 
      try{
-      const response = await fetch(`/products`);
-      const data: Product[] = await response.json(); 
+      // Use backticks (`) for template literals to inject the variable
+const response = await fetch(`${import.meta.env.VITE_API_URL}/products`);
+
+// Enforce the TypeScript type as an array of Products
+const data: Product[] = await response.json(); 
 // By adding ": Product[]", TypeScript will now aggressively warn you if your backend sends the wrong data shape.
+
       setProducts(data);
     } catch (err) {
      setError("Failed to fetch products. Please try again.");

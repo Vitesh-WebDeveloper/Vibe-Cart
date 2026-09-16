@@ -11,13 +11,15 @@ connectDB();
 
 const app = express();
 
-app.use(cors()); 
+// (this  2 are middleware)
+// This tells the browser: "Only allow requests from this specific Scheme + Host + Port"
+app.use(cors({ origin:"http://localhost:5173" }));
 app.use(express.json());
 
 // Any request that starts with '/api/products' will be handed off to productRoutes.js
 app.use('/api/products',productRoutes);
 
-// why we wrote 'process.env.PORT || 5000' why not 5000 directly, what is that procees.env.port ?
+// process.env.PORT catches whatever dynamic port Render assigns to your app.
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
