@@ -5,6 +5,7 @@ import connectDB from './config/db.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import productRoutes from './routes/productRoutes.js';
+import authRoutes from "./routes/authRoutes.js"
 
 dotenv.config();
 connectDB();
@@ -18,6 +19,8 @@ app.use(express.json());
 
 // Any request that starts with '/api/products' will be handed off to productRoutes.js
 app.use('/api/products',productRoutes);
+
+app.use('/api/auth', authRoutes);
 
 // process.env.PORT catches whatever dynamic port Render assigns to your app.
 const PORT = process.env.PORT || 5000;
