@@ -8,6 +8,8 @@ import NotFound from "./components/NotFound";
 import Navbar from "./components/Navbar";
 import Cart from "./components/Cart";
 import Toast from "./components/Toast";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 
 const App = () => {
   // Load the saved cart from localStorage when the app starts
@@ -150,7 +152,9 @@ const App = () => {
         />
 
         <Route path="*" element={<NotFound />} />
-
+        
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
 
       <Toast
