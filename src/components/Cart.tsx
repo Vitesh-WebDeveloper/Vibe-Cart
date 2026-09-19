@@ -82,7 +82,7 @@ const Cart = ({
                 onClick={() => decreaseQuantity(item.id)}
                 className="h-9 w-9 rounded border border-gray-300 text-lg hover:bg-gray-100"
               >
-                −
+                -
               </button>
 
               <span className="min-w-8 text-center font-semibold">
