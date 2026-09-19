@@ -42,37 +42,47 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import connectDB from './config/db.js';
 
+import authRoutes from './routes/authRoutes.js';
+import productRoutes from './routes/productRoutes.js';
+import cartRoutes from './routes/cartRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
+
+// 1. Load environment variables and connect to MongoDB Atlas
 dotenv.config();
 connectDB();
 
 const app = express();
 
-// 1. FIXED CORS: Allow both your local development AND your live Vercel frontend
+// 2. Middleware
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://vibe-cart-omega.vercel.app', // Your Vercel frontend URL from GitHub repo
-    /\.vercel\.app$/ // Allows any preview branch deployments on Vercel automatically
+    'https://vibe-cart-omega.vercel.app',
+    /\.vercel\.app$/
   ],
   credentials: true
 }));
 
 app.use(express.json());
 
-// 2. HEALTH CHECK ROUTE WITH LOGGING
-// If this works, Render logs will print "Health check pinged!" when you test it.
+// 3. HEALTH CHECK ROUTE (Must be at the top of your routes)
 app.get('/api/health', (req, res) => {
-  console.log('Health check pinged successfully!');
-  res.status(200).json({ status: 'OK', message: 'VibeCart API is running' });
+  console.log('HEALTH CHECK PINGED SUCCESSFULLY!');
+  return res.status(200).json({ status: 'OK', message: 'VibeCart API is running' });
 });
 
-// Root route fallback so visiting the base Render URL doesn't show a 404
+// Root route fallback
 app.get('/', (req, res) => {
-  res.status(200).json({ message: 'Welcome to VibeCart API' });
+  return res.status(200).json({ message: 'Welcome to VibeCart API' });
 });
 
-// ... your existing productRoutes, authRoutes, cartRoutes, orderRoutes go here ...
+// 4. API Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/cart', cartRoutes);
+app.use('/api/orders', orderRoutes);
 
+// 5. Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
