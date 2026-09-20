@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { type Product } from "../types";
 import { useEffect, useState } from "react"
+import { ProductCardSkeleton } from "./ProductCardSkeleton";
 
 const Home = () => {
  const [product, setProducts] = useState<Product[]>([]);
@@ -30,17 +31,22 @@ const data: Product[] = await response.json();
       fetchProducts();
       }, [])
 
-      if(loading){
-        return(
-        <div>Loading...</div>
-        )
-      }
+if (loading) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+      {/* Render 8 skeleton cards while fetching */}
+      {Array.from({ length: 8 }).map((_, index) => (
+        <ProductCardSkeleton key={index} />
+      ))}
+    </div>
+  );
+}
 
-      if(error){
-        return(
-        <div>{error}</div>
-        )
-      }
+if(error){
+  return (
+       <div>{error}</div>
+       );
+}
 
      return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4">
