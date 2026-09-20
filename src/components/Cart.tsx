@@ -38,13 +38,23 @@ const Cart = ({
     setLoading(true);
 
     try {
-      // 2. Send POST request to your backend /api/orders
+      // Format items to ensure consistency with backend schema
+      const formattedItems = cart.map((item) => ({
+        productId: String(item.id),
+        title: item.title,
+        price: item.price,
+        image: item.image,
+        quantity: item.quantity,
+      }));
+
+      // 2. Send POST request to your backend /api/orders WITH cart items in body
       const response = await fetch(`${import.meta.env.VITE_API_URL}/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}` // Sends the JWT token for authentication
-        }
+        },
+        body: JSON.stringify({ items: formattedItems }) // <-- PASSING REACT CART ITEMS TO BACKEND
       });
 
       const data = await response.json();
