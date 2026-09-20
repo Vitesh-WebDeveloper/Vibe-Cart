@@ -9,31 +9,18 @@ import {
   deleteProduct
 } from '../controllers/productController.js';
 
-// Authentication middleware
-import { requireAuth } from '../middleware/authMiddleware.js';
-
-// Admin authorization middleware
-import { requireAdmin } from '../middleware/adminMiddleware.js';
+import {
+  requireAuth,
+  requireAdmin
+} from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-// --------------------------------------------------
-// PUBLIC ROUTES
-// Anyone can browse products
-// --------------------------------------------------
-
+// Public routes
 router.get('/', getProducts);
-
 router.get('/:id', getProductById);
 
-// --------------------------------------------------
-// PROTECTED ADMIN ROUTE
-// User must:
-// 1. Be authenticated
-// 2. Have isAdmin: true
-// --------------------------------------------------
-
-// DELETE /api/products/:id
+// Admin-only delete route
 router.delete(
   '/:id',
   requireAuth,
