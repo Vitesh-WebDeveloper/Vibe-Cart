@@ -14,11 +14,6 @@ connectDB();
 
 const app = express();
 
-//checking the status purpose
-app.get('/api/health', (_req, res) => {
-  res.status(200).json({ status: 'OK', message: 'VibeCart API is running' });
-});
-
 // (these are middleware's)
 // This tells the browser: "Only allow requests from this specific Scheme + Host + Port"
 app.use(cors({ origin:"http://localhost:5173" }));
@@ -29,6 +24,11 @@ app.use('/api/products',productRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
+
+// Health check route to verify backend is live
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ status: 'OK', message: 'VibeCart API is running' });
+});
 
 // process.env.PORT catches whatever dynamic port Render assigns to your app.
 const PORT = process.env.PORT || 5000;
