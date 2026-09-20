@@ -13,18 +13,20 @@ connectDB();
 const app = express();
 
 // --- PRODUCTION CORS CONFIGURATION ---
-// WHY WE WRITE THIS: To allow requests from both local development 
-// and our live deployed Vercel domain while blocking unauthorized origins.
+// WHY WE WRITE THIS: To allow requests from local development 
+// and your live Vercel domain(s) while blocking unauthorized origins.
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://vibecart-frontend.vercel.app' // Update this if your Vercel project name/URL differs
+  'https://vibe-cart-omega.vercel.app' // Your exact live production domain
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
     // Allow requests with no origin (like mobile apps, curl, or Postman)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) !== -1) {
+    
+    // Allow exact matches in allowedOrigins OR any domain ending in .vercel.app
+    if (allowedOrigins.indexOf(origin) !== -1 || origin.endsWith('.vercel.app')) {
       return callback(null, true);
     } else {
       return callback(new Error('CORS Policy: Origin not allowed'));
