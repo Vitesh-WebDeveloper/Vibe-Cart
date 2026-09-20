@@ -33,6 +33,7 @@ app.use('/api/orders', orderRoutes);
 // process.env.PORT catches whatever dynamic port Render assigns to your app.
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+// Adding '0.0.0.0' tells the server to accept traffic from Render's external load balancers
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
 });
