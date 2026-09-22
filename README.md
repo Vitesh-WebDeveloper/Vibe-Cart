@@ -7,6 +7,7 @@ VibeCart is a production-grade e-commerce application built from scratch with a 
 ## 🚀 Live Demo & Links
 - **Live Application:** https://vibe-cart-omega.vercel.app/
 - **Live API Health Check:** https://vibecart-backend-43bl.onrender.com/api/health
+- **Demo Walkthrough Video:** 
 
 ## 🛠️ Architecture & Tech Stack
 - **Frontend:** React 18, TypeScript, Vite, Tailwind CSS, React Router DOM
