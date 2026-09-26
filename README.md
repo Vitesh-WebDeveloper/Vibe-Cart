@@ -27,7 +27,7 @@ VibeCart is a production-grade e-commerce application built from scratch with a 
 
 To run this project locally, you will need Node.js and a MongoDB instance running.
 
-**1. Clone the repository:**
+***1. Clone the repository:***
 ```bash
 git clone https://github.com/Vitesh-WebDeveloper/Vibe-Cart
 cd Vibe-Cart
