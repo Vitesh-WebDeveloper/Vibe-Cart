@@ -28,13 +28,26 @@ export const addToCart = async (req, res) => {
     const newItem = req.body; // The product the user clicked "Add to Cart" on
     
     // Check if product is already in the cart to avoid duplicates
-    const existingItem = cart.items.find(item => item.productId === newItem.productId);
-    
-    if (existingItem) {
-      existingItem.quantity += 1; // Just increase quantity
-    } else {
-      cart.items.push({ ...newItem, quantity: 1 }); // Add new item
-    }
+const quantityToAdd = newItem.quantity ?? 1;
+
+const existingItem = cart.items.find(
+  (item) => item.productId === newItem.productId
+);
+
+if (existingItem) {
+  if (existingItem.quantity + quantityToAdd > 10) {
+    return res.status(400).json({
+      error: "Maximum quantity per product is 10",
+    });
+  }
+
+  existingItem.quantity += quantityToAdd;
+} else {
+  cart.items.push({
+    ...newItem,
+    quantity: quantityToAdd,
+  });
+}
 
     await cart.save();
     res.status(200).json(cart);
