@@ -1,0 +1,7 @@
+ backend/greeting.js              |  3 [32m++[m
+ backend/impo.js                  |  3 [32m++[m
+ backend/notes/Day-01.md          | 52 [32m+++++++++++++++++++++++++++++[m
+ backend/notes/Day-02.md          | 31 [32m++++++++++++++++++[m
+ backend/practice/day-2/server.js | 71 [32m++++++++++++++++++++++++++++++++++++++++[m
+ backend/server.js                |  5 [32m++[m[31m-[m
+ 6 files changed, 164 insertions(+), 1 deletion(-)

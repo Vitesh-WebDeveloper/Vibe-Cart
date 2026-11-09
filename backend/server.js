@@ -7,10 +7,13 @@ import authRoutes from "./routes/authRoutes.js";
 import cartRoutes from './routes/cartRoutes.js'; 
 import orderRoutes from './routes/orderRoutes.js'; 
 
-dotenv.config(); 
+dotenv.config();
+// loads environment configuration so the application can read values through process.env.
 connectDB(); 
+// starts the MongoDB connection.
 
 const app = express();
+// express() creates your Express application.
 
 // --- PRODUCTION CORS CONFIGURATION ---
 // WHY WE WRITE THIS: To allow requests from local development 
