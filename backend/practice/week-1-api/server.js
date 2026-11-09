@@ -20,4 +20,5 @@ app.use((req, res) => {
 // Start the server
 app.listen(PORT, () => {
   console.log(`Week 1 API running on port ${PORT}`);
+  
 });

@@ -16,6 +16,7 @@ export const getProducts = async (req, res) => {
     });
 
   } catch (error) {
+    
     console.error("Unable to fetch products:", error);
 
     return res.status(500).json({

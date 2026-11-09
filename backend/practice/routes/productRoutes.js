@@ -3,7 +3,7 @@ import express from "express";
 import {
   getProducts,
   createProduct
-} from "../controllers/productController.js";
+} from  "../controllers/productController.js";
 
 import {
   validateProduct

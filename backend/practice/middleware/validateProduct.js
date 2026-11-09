@@ -14,4 +14,5 @@ export const validateProduct = (req, res, next) => {
   }
 
   return next();
+  
 };

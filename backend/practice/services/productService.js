@@ -35,4 +35,5 @@ export const addProduct = async (productData) => {
   products.push(newProduct);
 
   return newProduct;
+  
 };
