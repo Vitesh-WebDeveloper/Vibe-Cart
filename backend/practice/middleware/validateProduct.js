@@ -1,4 +1,3 @@
-
 export const validateProduct = (req, res, next) => {
   const { name, price } = req.body ?? {};
 
